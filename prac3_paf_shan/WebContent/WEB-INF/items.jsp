@@ -30,6 +30,7 @@ if (request.getParameter("itemCode") != null)
  description: <input name="itemDesc" type="text"><br> <input
  name="btnSubmit" type="submit" value="Save">
 </form>
+
 <%
  out.print(session.getAttribute("statusMsg"));
 %>
