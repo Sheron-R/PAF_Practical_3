@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Item {
+	
+	
+	private static boolean isSuccess;
+
 	public static Connection connect()
 	{ 
 
@@ -130,7 +134,80 @@ public class Item {
 		return output; 
 
 	}
+	
+	//DELETE ITEMS
+		public static boolean deleteItems(String itemID) {
+			
+			int convertedID = Integer.parseInt(itemID);
+			
+			try {
+				Connection con = connect(); 
+				 
+				 Statement stmt = (Statement) con.createStatement(); 
+			
+				
+				String sql = "delete from items where itemID = '"+convertedID+"'";
+				int r = stmt.executeUpdate(sql);
+				
+				if(r>0) {
+					
+					isSuccess = true;
+				}
+				else {
+					
+					isSuccess = false;
+				}
+				
+				
+			}catch(Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			
+			return isSuccess;
+		}
+
+	
+
+//UPDATE ITEMS
+
+public String UpdateItems(String itemID,String code, String name, String price, String desc)
+{
+	
+	 String output = ""; 
+		try
+		 { 
+		 Connection con = connect(); 
+		 if (con == null) 
+		 { 
+		 return "Error while connecting to the database"; 
+		 } 
+		 
+		 
+		 // create a prepared statement
+		 
+		 String query = " Update items set itemCode='"+code+"',itemName = '"+name+"',itemPrice = '"+price+"',itemDesc = '"+desc+"'"
+				 + "where itemID ='"+itemID+"'";
+		 PreparedStatement preparedStmt = con.prepareStatement(query); 
+		
+		//execute the statement
+		 
+		 preparedStmt.execute(); 
+		 con.close(); 
+		 output = "updated successfully"; 
+		 } 
+		catch (Exception e) 
+		 { 
+		 output = "Error while updating"; 
+		 System.err.println(e.getMessage()); 
+		 } 
+		return output; 
+	
 }
+
+}
+
 
 
 
