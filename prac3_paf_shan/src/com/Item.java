@@ -195,7 +195,7 @@ public String UpdateItems(String itemID,String code, String name, String price, 
 		 
 		 preparedStmt.execute(); 
 		 con.close(); 
-		 output = "updated successfully"; 
+		 output = "Updated Successfully"; 
 		 } 
 		catch (Exception e) 
 		 { 
